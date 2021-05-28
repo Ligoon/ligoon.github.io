@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Hugo tranquilpeak theme</title>
-    <link>https://example.org/posts/</link>
-    <description>Recent content in Posts on Hugo tranquilpeak theme</description>
+    <title>Posts on Ligoo&#39;s Blog</title>
+    <link>https://ligoon.github.io/posts/</link>
+    <description>Recent content in Posts on Ligoo&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 28 May 2021 20:51:10 +0800</lastBuildDate><atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-tw</language>
+    <lastBuildDate>Fri, 28 May 2021 20:51:10 +0800</lastBuildDate><atom:link href="https://ligoon.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用 Hugo 建立部落格</title>
-      <link>https://example.org/posts/build_blog/</link>
+      <link>https://ligoon.github.io/posts/build_blog/</link>
       <pubDate>Fri, 28 May 2021 20:51:10 +0800</pubDate>
       
-      <guid>https://example.org/posts/build_blog/</guid>
+      <guid>https://ligoon.github.io/posts/build_blog/</guid>
       <description>在 windows 安裝 WSL 啟用 Windows 內的 WSL 設定 在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 2021 更新 WSL2 原本 windows 的 WSL 為 version1，近期改版成 version2，接下來教學如何升級到 WSL2。經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為原本的 Ubuntu distro 不知為何就是無法升級成 WSL2，總之筆者用了 wsl --unregister Ubuntu 的指令解除了原本的 distro，然後重新安裝。接下來就是參考官方的教學一步一步安裝。 安裝教學、讓WSL介面更好看
 另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到這裡選一個喜歡的主題下載，例如：

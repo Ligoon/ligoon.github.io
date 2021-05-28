@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="zh-tw">
   <head>
     
     <meta charset="UTF-8">
@@ -23,9 +23,9 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
 <meta property="og:type" content="article">
 <meta property="og:title" content="用 Hugo 建立部落格">
 <meta name="twitter:title" content="用 Hugo 建立部落格">
-<meta property="og:url" content="https://example.org/posts/build_blog/">
-<meta property="twitter:url" content="https://example.org/posts/build_blog/">
-<meta property="og:site_name" content="Hugo tranquilpeak theme">
+<meta property="og:url" content="https://ligoon.github.io/posts/build_blog/">
+<meta property="twitter:url" content="https://ligoon.github.io/posts/build_blog/">
+<meta property="og:site_name" content="Ligoo&#39;s Blog">
 <meta property="og:description" content="在 windows 安裝 WSL 啟用 Windows 內的 WSL 設定 在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 2021 更新 WSL2 原本 windows 的 WSL 為 version1，近期改版成 version2，接下來教學如何升級到 WSL2。經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為原本的 Ubuntu distro 不知為何就是無法升級成 WSL2，總之筆者用了 wsl --unregister Ubuntu 的指令解除了原本的 distro，然後重新安裝。接下來就是參考官方的教學一步一步安裝。 安裝教學、讓WSL介面更好看
 另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到這裡選一個喜歡的主題下載，例如：
@@ -36,7 +36,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到這裡選一個喜歡的主題下載，例如：
 curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors 接著在 ~./zshrc 裡面加上這行 (參考資料)：
 ## set colors for LS_COLORS eval `dircolors ~/.dircolors` 安裝 linux distro 到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu">
-<meta property="og:locale" content="en-us">
+<meta property="og:locale" content="zh-tw">
 
   
     <meta property="article:published_time" content="2021-05-28T20:51:10">
@@ -67,12 +67,12 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
 
     <title>用 Hugo 建立部落格</title>
 
-    <link rel="icon" href="https://example.org/favicon.png">
+    <link rel="icon" href="https://ligoon.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://example.org/posts/build_blog/">
+    <link rel="canonical" href="https://ligoon.github.io/posts/build_blog/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -80,7 +80,7 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://example.org/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    <link rel="stylesheet" href="https://ligoon.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
@@ -95,17 +95,17 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
       <header id="header" data-behavior="1">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://example.org/">Hugo tranquilpeak theme</a>
+    <a class="header-title-link" href="https://ligoon.github.io/">Ligoo&#39;s Blog</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="https://example.org/#about">
+         href="https://ligoon.github.io/#about">
     
     
     
       
-        <img class="header-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=90" alt="Author&#39;s picture" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=90" alt="作者的圖片" />
       
     
     </a>
@@ -116,8 +116,8 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="https://example.org/#about">
-          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="Author&#39;s picture" />
+        <a href="https://ligoon.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="作者的圖片" />
         </a>
         <h4 class="sidebar-profile-name">Firstname Lastname</h4>
         
@@ -129,51 +129,51 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://example.org/">
+      <a class="sidebar-button-link " href="https://ligoon.github.io/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
-      <span class="sidebar-button-desc">Home</span>
+      <span class="sidebar-button-desc">首頁</span>
     </a>
   </li>
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://example.org/categories">
+      <a class="sidebar-button-link " href="https://ligoon.github.io/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
-      <span class="sidebar-button-desc">Categories</span>
+      <span class="sidebar-button-desc">分類</span>
     </a>
   </li>
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://example.org/tags">
+      <a class="sidebar-button-link " href="https://ligoon.github.io/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
-      <span class="sidebar-button-desc">Tags</span>
+      <span class="sidebar-button-desc">標籤</span>
     </a>
   </li>
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://example.org/archives">
+      <a class="sidebar-button-link " href="https://ligoon.github.io/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
-      <span class="sidebar-button-desc">Archives</span>
+      <span class="sidebar-button-desc">所有文章</span>
     </a>
   </li>
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://example.org/#about">
+      <a class="sidebar-button-link " href="https://ligoon.github.io/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
-      <span class="sidebar-button-desc">About</span>
+      <span class="sidebar-button-desc">關於</span>
     </a>
   </li>
 
@@ -207,11 +207,11 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://example.org/index.xml">
+      <a class="sidebar-button-link " href="https://ligoon.github.io/index.xml">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
-      <span class="sidebar-button-desc">RSS</span>
+      <span class="sidebar-button-desc">Atom</span>
     </a>
   </li>
 
@@ -240,7 +240,7 @@ curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolor
     
       <time itemprop="datePublished" datetime="2021-05-28T20:51:10&#43;08:00">
         
-  May 28, 2021
+  五月 28, 2021
 
       </time>
     
@@ -312,14 +312,14 @@ eval `dircolors ~/.dircolors`
                 <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
-                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
                 </a>
             </li>
             <li class="post-action">
               
                 <a class="post-action-btn btn btn--disabled">
               
-                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
                 </a>
             </li>
@@ -335,19 +335,19 @@ eval `dircolors ~/.dircolors`
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://example.org/posts/build_blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ligoon.github.io/posts/build_blog/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://example.org/posts/build_blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ligoon.github.io/posts/build_blog/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://example.org/posts/build_blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ligoon.github.io/posts/build_blog/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -398,14 +398,14 @@ eval `dircolors ~/.dircolors`
                 <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
-                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
                 </a>
             </li>
             <li class="post-action">
               
                 <a class="post-action-btn btn btn--disabled">
               
-                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
                 </a>
             </li>
@@ -421,19 +421,19 @@ eval `dircolors ~/.dircolors`
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://example.org/posts/build_blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ligoon.github.io/posts/build_blog/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://example.org/posts/build_blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ligoon.github.io/posts/build_blog/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://example.org/posts/build_blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ligoon.github.io/posts/build_blog/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -463,20 +463,20 @@ eval `dircolors ~/.dircolors`
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fexample.org%2Fposts%2Fbuild_blog%2F">
-          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fligoon.github.io%2Fposts%2Fbuild_blog%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fexample.org%2Fposts%2Fbuild_blog%2F">
-          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fligoon.github.io%2Fposts%2Fbuild_blog%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fexample.org%2Fposts%2Fbuild_blog%2F">
-          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fligoon.github.io%2Fposts%2Fbuild_blog%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
         </a>
       </li>
     
@@ -491,7 +491,7 @@ eval `dircolors ~/.dircolors`
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="Author&#39;s picture" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="作者的圖片" />
     
     <h4 id="about-card-name">Firstname Lastname</h4>
     
@@ -519,7 +519,7 @@ eval `dircolors ~/.dircolors`
     
   
     
-      <div id="cover" style="background-image:url('https://example.org/images/cover.jpg');"></div>
+      <div id="cover" style="background-image:url('https://ligoon.github.io/images/cover.jpg');"></div>
     
   
 
@@ -532,7 +532,7 @@ eval `dircolors ~/.dircolors`
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://example.org/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+<script src="https://ligoon.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
 
 <script lang="javascript">
@@ -567,7 +567,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/example.org\/posts\/build_blog\/';
+          this.page.url = 'https:\/\/ligoon.github.io\/posts\/build_blog\/';
           
             this.page.identifier = '\/posts\/build_blog\/'
           
