@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.83.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Firstname Lastname">
+<meta name="keywords" content="">
+<meta name="description" content="在 windows 安裝 WSL 啟用 Windows 內的 WSL 設定 在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 2021 更新 WSL2 原本 windows 的 WSL 為 version1，近期改版成 version2，接下來教學如何升級到 WSL2。經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為原本的 Ubuntu distro 不知為何就是無法升級成 WSL2，總之筆者用了 wsl --unregister Ubuntu 的指令解除了原本的 distro，然後重新安裝。接下來就是參考官方的教學一步一步安裝。 安裝教學、讓WSL介面更好看
+另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到這裡選一個喜歡的主題下載，例如：
+curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors 接著在 ~./zshrc 裡面加上這行 (參考資料)：
+## set colors for LS_COLORS eval `dircolors ~/.dircolors` 安裝 linux distro 到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu">
+
+
+<meta property="og:description" content="在 windows 安裝 WSL 啟用 Windows 內的 WSL 設定 在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 2021 更新 WSL2 原本 windows 的 WSL 為 version1，近期改版成 version2，接下來教學如何升級到 WSL2。經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為原本的 Ubuntu distro 不知為何就是無法升級成 WSL2，總之筆者用了 wsl --unregister Ubuntu 的指令解除了原本的 distro，然後重新安裝。接下來就是參考官方的教學一步一步安裝。 安裝教學、讓WSL介面更好看
+另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到這裡選一個喜歡的主題下載，例如：
+curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors 接著在 ~./zshrc 裡面加上這行 (參考資料)：
+## set colors for LS_COLORS eval `dircolors ~/.dircolors` 安裝 linux distro 到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Hugo 建立部落格">
+<meta name="twitter:title" content="用 Hugo 建立部落格">
+<meta property="og:url" content="https://example.org/posts/build_blog/">
+<meta property="twitter:url" content="https://example.org/posts/build_blog/">
+<meta property="og:site_name" content="Hugo tranquilpeak theme">
+<meta property="og:description" content="在 windows 安裝 WSL 啟用 Windows 內的 WSL 設定 在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 2021 更新 WSL2 原本 windows 的 WSL 為 version1，近期改版成 version2，接下來教學如何升級到 WSL2。經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為原本的 Ubuntu distro 不知為何就是無法升級成 WSL2，總之筆者用了 wsl --unregister Ubuntu 的指令解除了原本的 distro，然後重新安裝。接下來就是參考官方的教學一步一步安裝。 安裝教學、讓WSL介面更好看
+另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到這裡選一個喜歡的主題下載，例如：
+curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors 接著在 ~./zshrc 裡面加上這行 (參考資料)：
+## set colors for LS_COLORS eval `dircolors ~/.dircolors` 安裝 linux distro 到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu">
+<meta name="twitter:description" content="在 windows 安裝 WSL 啟用 Windows 內的 WSL 設定 在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 2021 更新 WSL2 原本 windows 的 WSL 為 version1，近期改版成 version2，接下來教學如何升級到 WSL2。經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為原本的 Ubuntu distro 不知為何就是無法升級成 WSL2，總之筆者用了 wsl --unregister Ubuntu 的指令解除了原本的 distro，然後重新安裝。接下來就是參考官方的教學一步一步安裝。 安裝教學、讓WSL介面更好看
+另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到這裡選一個喜歡的主題下載，例如：
+curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors 接著在 ~./zshrc 裡面加上這行 (參考資料)：
+## set colors for LS_COLORS eval `dircolors ~/.dircolors` 安裝 linux distro 到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2021-05-28T20:51:10">
+  
+  
+    <meta property="article:modified_time" content="2021-05-28T20:51:10">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=640">
+
+
+    <title>用 Hugo 建立部落格</title>
+
+    <link rel="icon" href="https://example.org/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://example.org/posts/build_blog/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://example.org/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://example.org/">Hugo tranquilpeak theme</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://example.org/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://example.org/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Firstname Lastname</h4>
+        
+          <h5 class="sidebar-profile-bio">Super bio with markdown support <strong>COOL</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/kakawait" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/636472/kakawait" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      用 Hugo 建立部落格
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-05-28T20:51:10&#43;08:00">
+        
+  May 28, 2021
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h2 id="在-windows-安裝-wsl">在 windows 安裝 WSL</h2>
+<h3 id="啟用-windows-內的-wsl-設定">啟用 Windows 內的 WSL 設定</h3>
+<p>在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：</p>
+<pre><code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+</code></pre><h3 id="2021-更新-wsl2">2021 更新 WSL2</h3>
+<p>原本 windows 的 WSL 為 version1，近期改版成 version2，接下來教學如何升級到 WSL2。經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為原本的 Ubuntu distro 不知為何就是無法升級成 WSL2，總之筆者用了 <code>wsl --unregister Ubuntu</code> 的指令解除了原本的 distro，然後重新安裝。接下來就是參考官方的教學一步一步安裝。 <a href="https://docs.microsoft.com/zh-tw/windows/wsl/install-win10">安裝教學</a>、<a href="https://www.youtube.com/watch?v=235G6X5EAvM&amp;ab_channel=TheDigitalLife">讓WSL介面更好看</a></p>
+<p>另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到<a href="https://github.com/seebi/dircolors-solarized">這裡</a>選一個喜歡的主題下載，例如：</p>
+<pre><code class="language-bash=" data-lang="bash=">curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors
+</code></pre><p>接著在 <code>~./zshrc</code> 裡面加上這行 (<a href="https://medium.com/gammastack/setup-wsl-on-windows-part-2-f64a9fd546ac">參考資料</a>)：</p>
+<pre><code>## set colors for LS_COLORS
+eval `dircolors ~/.dircolors`
+</code></pre><h3 id="安裝-linux-distro">安裝 linux distro</h3>
+<p>到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu</p>
+<p><img src="https://i.imgur.com/JmH28qf.jpg" alt=""></p>
+<p>安裝完成後開啟 App，第一次進入會需要設定使用者名稱以及密碼。除了使用 Ubuntu App 進入外，也可以開啟 Windows 的命令提示字元，使用 <code>bash</code> 或 <code>wsl</code> 進入。<strong>Windows 本機的磁碟資料都會存放在 Linux 系統的 mnt 資料夾內。</strong> 使用指令 <code>cd /mnt</code> 進入資料夾。</p>
+<h3 id="安裝-zsh-以及-oh-my-zsh-套件">安裝 zsh 以及 oh-my-zsh 套件</h3>
+<p><strong>此步驟非必要</strong>。如果希望終端機可以好看一點，可以考慮安裝。如果不安裝可以直接跳至安裝 jekyll 步驟。安裝完效果如下：</p>
+<p><img src="https://i.imgur.com/AdA77t1.jpg" alt=""></p>
+<h4 id="一-windows-安裝-powerline-字體">(一) Windows 安裝 Powerline 字體</h4>
+<p>對於 Windows 用戶而言，必須使用 Powerline 的字體才能顯示出特定的 icon，因此必須到 <a href="https://github.com/powerline/fonts">github Page</a>，找到喜歡的字體的 ttf 檔，下載後在 Windows上安裝，<strong>不要裝在WSL的系統，因為WSL是用windows終端機的字體</strong>。</p>
+<p><img src="https://i.imgur.com/TqmL6B2.jpg" alt=""></p>
+<p>:::info
+[2020-2-11] 根據筆者的測試，似乎不是所有 Powerline 字體都可以正常顯示 icon，經測試安裝完可以正常顯示的是 <code>DejaVu Sans Mono for Powerline.ttf</code>。安裝完後，在之後的步驟如果發現還是無法正常顯示 icon，請使用此方式安裝：<a href="https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58">How to install Powerline fonts in Windows</a>
+:::
+:::info
+[2020-2-11] 如果安裝完字體卻發現 Ubuntu 的終端機沒有該字體可以選擇，也許是 windows 的命令提示字元的字集為 950，但我們要使用的字集為 65001，解決方法：<a href="https://www.opencli.com/internet/windows-cmd-change-fonts">Windows 命令提示字元 (CMD) 設定等寬字型</a>
+:::</p>
+<h4 id="二-安裝-zsh">(二) 安裝 zsh</h4>
+<blockquote>
+<p>詳細安裝 zsh 以及 oh-my-zsh 步驟請參考：<a href="https://hackmd.io/@tf-z1zFMTIC8ADhxEcGJEA/BJByCIUHf?type=view">(WSL) 環境設定</a></p>
+</blockquote>
+<p>下載 zsh</p>
+<pre><code>$ sudo apt-get install zsh
+</code></pre><p>參考指令：</p>
+<ul>
+<li>檢查版本： <code>$ zsh --version</code></li>
+<li>將 zsh 設為預設 shell： <code>$ chsh -s $(which zsh)</code></li>
+<li>還原成原本預設的 shell： <code>chsh -s /bin/bash</code></li>
+<li>刪除 zsh：<code>sudo apt-get --purge remove zsh</code></li>
+</ul>
+<h4 id="三-安裝-oh-my-zsh">(三) 安裝 oh-my-zsh</h4>
+<pre><code>$ sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;
+</code></pre><p>安裝完後可進入 <code>vim ~/.zshrc</code> 設定喜歡的主題</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://example.org/posts/build_blog/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://example.org/posts/build_blog/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://example.org/posts/build_blog/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 Firstname Lastname. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://example.org/posts/build_blog/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://example.org/posts/build_blog/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://example.org/posts/build_blog/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fexample.org%2Fposts%2Fbuild_blog%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fexample.org%2Fposts%2Fbuild_blog%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fexample.org%2Fposts%2Fbuild_blog%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Firstname Lastname</h4>
+    
+      <div id="about-card-bio">Super bio with markdown support <strong>COOL</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Your job title
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        France
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://example.org/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://example.org/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/example.org\/posts\/build_blog\/';
+          
+            this.page.identifier = '\/posts\/build_blog\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
