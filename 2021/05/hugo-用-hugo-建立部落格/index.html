@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.83.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Chieh Nien">
+<meta name="keywords" content="">
+<meta name="description" content="這篇用來記錄如何在 Windows 環境中安裝 WSL(Windows Subsystem for linux) 以及相關套件，並且使用 WSL 架設 Hugo 部落格最後發布到 Github pages">
+
+
+<meta property="og:description" content="這篇用來記錄如何在 Windows 環境中安裝 WSL(Windows Subsystem for linux) 以及相關套件，並且使用 WSL 架設 Hugo 部落格最後發布到 Github pages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hugo] 用 Hugo 建立部落格">
+<meta name="twitter:title" content="[Hugo] 用 Hugo 建立部落格">
+<meta property="og:url" content="https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+<meta property="twitter:url" content="https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+<meta property="og:site_name" content="Ligoon&#39;s Blog">
+<meta property="og:description" content="這篇用來記錄如何在 Windows 環境中安裝 WSL(Windows Subsystem for linux) 以及相關套件，並且使用 WSL 架設 Hugo 部落格最後發布到 Github pages">
+<meta name="twitter:description" content="這篇用來記錄如何在 Windows 環境中安裝 WSL(Windows Subsystem for linux) 以及相關套件，並且使用 WSL 架設 Hugo 部落格最後發布到 Github pages">
+<meta property="og:locale" content="zh-tw">
+
+  
+    <meta property="article:published_time" content="2021-05-28T20:51:10">
+  
+  
+    <meta property="article:modified_time" content="2021-05-28T20:51:10">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://ppt.cc/fp0Fbx">
+  <meta property="twitter:image" content="https://ppt.cc/fp0Fbx">
+
+
+  <meta property="og:image" content="https://ppt.cc/fKwEKx">
+  <meta property="twitter:image" content="https://ppt.cc/fKwEKx">
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=640">
+
+
+    <title>[Hugo] 用 Hugo 建立部落格</title>
+
+    <link rel="icon" href="https://ligoon.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://ligoon.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://ligoon.github.io/">Ligoon&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://ligoon.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=90" alt="作者的圖片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://ligoon.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=110" alt="作者的圖片" />
+        </a>
+        <h4 class="sidebar-profile-name">Chieh Nien</h4>
+        
+          <h5 class="sidebar-profile-bio">Don&rsquo;t be a programmer. Be a problem solver.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首頁</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分類</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">標籤</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">所有文章</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">關於</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Ligoon" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">Atom</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              "
+       style="background-image:url('https://ppt.cc/fKwEKx')"
+       data-behavior="5">
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaOut
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      [Hugo] 用 Hugo 建立部落格
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-05-28T20:51:10&#43;08:00">
+        
+  五月 28, 2021
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>這篇用來記錄如何在 Windows 環境中安裝 WSL(Windows Subsystem for linux) 以及相關套件，並且使用 WSL 架設 Hugo 部落格最後發布到 Github pages</p>
+
+<p>Hugo 是用 GO 語言所編寫的靜態網頁生成器，用 Hugo 架站的好處是速度賊快，號稱世界上最快的網站構建框架，原本筆者最一開始(大概兩年前吧)是使用 jekyll 來架設，但因為環境更新重裝後整個壞掉，筆者安裝了兩天還是搞不定於是決定放棄 jekyll 並且移植到 Hugo，真心覺得 Hugo 安裝以及環境巨簡單且乾淨。</p>
+
+<h1 id="table-of-contents">目錄</h1><nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#在-windows-安裝-wsl">在 windows 安裝 WSL</a>
+<ul>
+<li><a href="#啟用-windows-內的-wsl-設定">啟用 Windows 內的 WSL 設定</a></li>
+<li><a href="#更新-wsl2-2021">更新 WSL2 (2021)</a></li>
+<li><a href="#安裝-linux-distro">安裝 linux distro</a></li>
+<li><a href="#安裝-windows-terminal-zsh-oh-my-zsh-套件">安裝 windows terminal / zsh / oh-my-zsh 套件</a>
+<ul>
+<li><a href="#一-windows-安裝-powerline-字體">(一) Windows 安裝 Powerline 字體</a></li>
+<li><a href="#二-安裝-zsh-oh-my-zsh">(二) 安裝 zsh / oh-my-zsh</a></li>
+<li><a href="#三-安裝-powerlevel10k">(三) 安裝 powerlevel10k</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#安裝-jekyll">安裝 jekyll</a></li>
+<li><a href="#開始建立部落格">開始建立部落格</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h2 id="在-windows-安裝-wsl">在 windows 安裝 WSL</h2>
+
+<h3 id="啟用-windows-內的-wsl-設定">啟用 Windows 內的 WSL 設定</h3>
+
+<p>在 [開始] 搜尋 windows powershell，並按右鍵以系統管理員身分執行，輸入以下指令：(註: 如果只是要安裝 WSL1 可以重新啟動，如果要安裝 WSL2 可以先跳至更新 WSL2 (2021) 的步驟，稍後再重新啟動)</p>
+<pre><code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code></pre>
+<h3 id="更新-wsl2-2021">更新 WSL2 (2021)</h3>
+
+<p>如果只想安裝 version1，可以直接跳到安裝 linux distro的步驟。</p>
+
+<p>原本 windows 的 WSL 為 version1，近期改版成 version2，接下來紀錄如何升級到 WSL2 或安裝 WSL2。首先一樣在 windows powershell 執行以下指令啟動虛擬化功能:</p>
+<pre><code>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</code></pre>
+<p>執行完後重新啟動，並且至<a href="https://docs.microsoft.com/zh-tw/windows/wsl/install-win10">安裝教學</a>裡的步驟 4 下載 linux 套件，接著在 powershell 執行以下指令來設定之後安裝的 WSL 都是 version2:</p>
+<pre><code>wsl --set-default-version 2</code></pre>
+<p>之後就可以跳至下一個步驟安裝 linux distro</p>
+
+<p>筆者原本之前安裝的是 WSL1 Ubuntu，經過一整天的踩雷，最後重新安裝了另一個版本的 linux distro (Ubuntu-20.04)，因為不知為何就是無法升級成 WSL2，總之以下紀錄採雷過程可能用到的指令:
+(註:解除註冊後需要再去 Windows 設定-&gt;應用程式，來刪除 Ubuntu 比較乾淨)</p>
+<pre><code>wsl -l -v                   # 顯示目前電腦裡安裝的 wsl 清單以及版本
+wsl --unregister Ubuntu     # 解除 distro 註冊(Ubuntu 為第一個指令顯示的 WSL 名字)
+wsl --set-version Ubuntu 2  # 升級版本(Ubuntu 為第一個指令顯示的 WSL 名字)</code></pre>
+<p>[讓WSL介面更好看]()</p>
+
+<p>另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到<a href="https://github.com/seebi/dircolors-solarized">這裡</a>選一個喜歡的主題下載，例如：</p>
+<pre><code>curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors</code></pre>
+<p>接著在 <code>~./zshrc</code> 裡面加上這行 (<a href="https://medium.com/gammastack/setup-wsl-on-windows-part-2-f64a9fd546ac">參考資料</a>)：</p>
+<pre><code>## set colors for LS_COLORS
+eval `dircolors ~/.dircolors`</code></pre>
+<h3 id="安裝-linux-distro">安裝 linux distro</h3>
+
+<p>到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu 20.04 LTS</p>
+
+<p><img src="https://i.imgur.com/JmH28qf.jpg" alt="" /></p>
+
+<p>安裝完成後開啟 App，第一次進入會需要設定使用者名稱以及密碼。除了使用 Ubuntu App 進入外，也可以開啟 Windows 的命令提示字元，使用 <code>bash</code> 或 <code>wsl</code> 進入(或者使用 windows terminal)。<strong>Windows 本機的磁碟資料都會存放在 Linux 系統的 mnt 資料夾內。</strong> 使用指令 <code>cd /mnt</code> 進入資料夾。</p>
+
+<h3 id="安裝-windows-terminal-zsh-oh-my-zsh-套件">安裝 windows terminal / zsh / oh-my-zsh 套件</h3>
+
+<p><strong>此步驟非必要</strong>。如果希望終端機可以好看一點，可以考慮安裝，另外可以參考 <a href="https://www.youtube.com/watch?v=235G6X5EAvM&amp;ab_channel=TheDigitalLife">youtube 教學</a>。如果不安裝可以直接跳至安裝 Hugo 步驟。windows terminal 一樣到 Microsoft Store 安裝 (強烈建議安裝，可以少掉之後設定很多不必要的 bug)。所有套件都安裝完後效果如下：</p>
+
+<p><img src="https://i.imgur.com/j2HBJfD.jpg" alt="" /></p>
+
+<h4 id="一-windows-安裝-powerline-字體">(一) Windows 安裝 Powerline 字體</h4>
+
+<p>對於 Windows 用戶而言，必須使用 Powerline 的字體才能顯示出特定的 icon，可以到 <a href="https://github.com/powerline/fonts">github Page</a> 或 <a href="https://www.nerdfonts.com/">nerd font</a>，找到喜歡的字體的 ttf 檔 (筆者是使用 Hack)，下載後在 Windows 上安裝，<strong>不要裝在 WSL 的系統，因為 WSL 是用 windows 終端機的字體</strong>。</p>
+
+<p><img src="https://i.imgur.com/TqmL6B2.jpg" alt="" /></p>
+
+<h4 id="二-安裝-zsh-oh-my-zsh">(二) 安裝 zsh / oh-my-zsh</h4>
+
+<p>接下來的步驟可以參考：<a href="https://hackmd.io/@tf-z1zFMTIC8ADhxEcGJEA/BJByCIUHf?type=view">(WSL) 環境設定</a> 以及上面提到的 youtube 教學影片。開啟 ubuntu terminal，先用指令 <code>$ sudo apt update</code> 更新 apt，然後再下載 zsh / oh-my-zsh :</p>
+<pre><code>sudo apt install zsh -y
+sh -c &#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&#34;</code></pre>
+<p>安裝完後可進入<code>vim ~/.zshrc</code>設定喜歡的主題，或者可以跳至下一步安裝 powerlevel10k 主題。</p>
+
+<p>其他參考指令：</p>
+<pre><code>zsh --version                       # 檢查版本
+chsh -s $(which zsh)                # 將 zsh 設為預設 shell
+chsh -s /bin/bash                   # 還原成原本預設的 shell
+sudo apt-get --purge remove zsh     # 刪除 zsh</code></pre>
+<h4 id="三-安裝-powerlevel10k">(三) 安裝 powerlevel10k</h4>
+<pre><code>$ sh -c &#34;$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&#34;</code></pre>
+<h2 id="安裝-jekyll">安裝 jekyll</h2>
+
+<p>筆者根據<a href="https://jekyllrb.com/docs/installation/windows/">官網</a>的教學，卻在後來的 <code>gem update</code> 指令出錯，於是乎又跟著網路上亂七八糟的教學，先remove ruby，然後又透過這個<a href="https://stackoverflow.com/questions/37720892/you-dont-have-write-permissions-for-the-var-lib-gems-2-3-0-directory">stackoverflow 的答案</a>安裝前半部的部分(沒有 rbenv)，原本要安裝 rbenv 但後來又沒有裝，然後在 <code>gem update</code> 之前也先根據<a href="https://jekyllrb.com/docs/troubleshooting/#no-sudo">這個方法</a>設定 no-sudo ，之後再執行 <code>gem update</code> 跟 <code>gem install jekyll bundler</code> 就成功了，但我覺得我的環境現在好像有點亂，應該說是巨亂，爆炸亂。總之，如果要我重新安裝一次，我可能還是會再次踩雷。</p>
+
+<blockquote>
+<p><a href="https://stackoverflow.com/questions/30780988/error-installing-nokogiri-in-ubuntu-14-0-4-ruby-1-8-7">https://stackoverflow.com/questions/30780988/error-installing-nokogiri-in-ubuntu-14-0-4-ruby-1-8-7</a></p>
+</blockquote>
+
+<h2 id="開始建立部落格">開始建立部落格</h2>
+
+<p>創建新的 jekyll 架構，在想要的資料夾路徑底下輸入：</p>
+<pre><code>jekyll new 名稱</code></pre>
+<blockquote>
+<p><a href="https://webdesign.tutsplus.com/tutorials/how-to-set-up-a-jekyll-theme--cms-26332">https://webdesign.tutsplus.com/tutorials/how-to-set-up-a-jekyll-theme--cms-26332</a></p>
+</blockquote>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 Chieh Nien. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fligoon.github.io%2F2021%2F05%2Fhugo-%25E7%2594%25A8-hugo-%25E5%25BB%25BA%25E7%25AB%258B%25E9%2583%25A8%25E8%2590%25BD%25E6%25A0%25BC%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fligoon.github.io%2F2021%2F05%2Fhugo-%25E7%2594%25A8-hugo-%25E5%25BB%25BA%25E7%25AB%258B%25E9%2583%25A8%25E8%2590%25BD%25E6%25A0%25BC%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fligoon.github.io%2F2021%2F05%2Fhugo-%25E7%2594%25A8-hugo-%25E5%25BB%25BA%25E7%25AB%258B%25E9%2583%25A8%25E8%2590%25BD%25E6%25A0%25BC%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=110" alt="作者的圖片" />
+    
+    <h4 id="about-card-name">Chieh Nien</h4>
+    
+      <div id="about-card-bio">Don&rsquo;t be a programmer. Be a problem solver.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        NYCU CS student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://ligoon.github.io/img/sea_wave.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://ligoon.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/ligoon.github.io\/2021\/05\/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC\/';
+          
+            this.page.identifier = '\/2021\/05\/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'tranquilpeak';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
