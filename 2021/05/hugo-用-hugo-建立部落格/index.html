@@ -41,8 +41,8 @@
 
 
 
-  <meta property="og:image" content="https://ppt.cc/fp0Fbx">
-  <meta property="twitter:image" content="https://ppt.cc/fp0Fbx">
+  <meta property="og:image" content="https://ppt.cc/fRsPKx">
+  <meta property="twitter:image" content="https://ppt.cc/fRsPKx">
 
 
   <meta property="og:image" content="https://ppt.cc/fKwEKx">
@@ -256,10 +256,10 @@
 <ul>
 <li><a href="#一-windows-安裝-powerline-字體">(一) Windows 安裝 Powerline 字體</a></li>
 <li><a href="#二-安裝-zsh-oh-my-zsh">(二) 安裝 zsh / oh-my-zsh</a></li>
-<li><a href="#三-安裝-powerlevel10k">(三) 安裝 powerlevel10k</a></li>
+<li><a href="#三-安裝-powerlevel10k-修改-ls-colors">(三) 安裝 powerlevel10k / 修改 LS_COLORS</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#安裝-jekyll">安裝 jekyll</a></li>
+<li><a href="#安裝-hugo">安裝 Hugo</a></li>
 <li><a href="#開始建立部落格">開始建立部落格</a></li>
 </ul></li>
 </ul>
@@ -286,13 +286,6 @@
 <pre><code>wsl -l -v                   # 顯示目前電腦裡安裝的 wsl 清單以及版本
 wsl --unregister Ubuntu     # 解除 distro 註冊(Ubuntu 為第一個指令顯示的 WSL 名字)
 wsl --set-version Ubuntu 2  # 升級版本(Ubuntu 為第一個指令顯示的 WSL 名字)</code></pre>
-<p>[讓WSL介面更好看]()</p>
-
-<p>另外，在安裝好 zsh 以及 oh-my-zsh 後，會發現 ls 所產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到<a href="https://github.com/seebi/dircolors-solarized">這裡</a>選一個喜歡的主題下載，例如：</p>
-<pre><code>curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors</code></pre>
-<p>接著在 <code>~./zshrc</code> 裡面加上這行 (<a href="https://medium.com/gammastack/setup-wsl-on-windows-part-2-f64a9fd546ac">參考資料</a>)：</p>
-<pre><code>## set colors for LS_COLORS
-eval `dircolors ~/.dircolors`</code></pre>
 <h3 id="安裝-linux-distro">安裝 linux distro</h3>
 
 <p>到 Microsoft Store 選擇適合的 WSL 散發套件，筆者選擇安裝 Ubuntu 20.04 LTS</p>
@@ -325,23 +318,16 @@ sh -c &#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
 chsh -s $(which zsh)                # 將 zsh 設為預設 shell
 chsh -s /bin/bash                   # 還原成原本預設的 shell
 sudo apt-get --purge remove zsh     # 刪除 zsh</code></pre>
-<h4 id="三-安裝-powerlevel10k">(三) 安裝 powerlevel10k</h4>
-<pre><code>$ sh -c &#34;$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&#34;</code></pre>
-<h2 id="安裝-jekyll">安裝 jekyll</h2>
-
-<p>筆者根據<a href="https://jekyllrb.com/docs/installation/windows/">官網</a>的教學，卻在後來的 <code>gem update</code> 指令出錯，於是乎又跟著網路上亂七八糟的教學，先remove ruby，然後又透過這個<a href="https://stackoverflow.com/questions/37720892/you-dont-have-write-permissions-for-the-var-lib-gems-2-3-0-directory">stackoverflow 的答案</a>安裝前半部的部分(沒有 rbenv)，原本要安裝 rbenv 但後來又沒有裝，然後在 <code>gem update</code> 之前也先根據<a href="https://jekyllrb.com/docs/troubleshooting/#no-sudo">這個方法</a>設定 no-sudo ，之後再執行 <code>gem update</code> 跟 <code>gem install jekyll bundler</code> 就成功了，但我覺得我的環境現在好像有點亂，應該說是巨亂，爆炸亂。總之，如果要我重新安裝一次，我可能還是會再次踩雷。</p>
-
-<blockquote>
-<p><a href="https://stackoverflow.com/questions/30780988/error-installing-nokogiri-in-ubuntu-14-0-4-ruby-1-8-7">https://stackoverflow.com/questions/30780988/error-installing-nokogiri-in-ubuntu-14-0-4-ruby-1-8-7</a></p>
-</blockquote>
+<h4 id="三-安裝-powerlevel10k-修改-ls-colors">(三) 安裝 powerlevel10k / 修改 LS_COLORS</h4>
+<pre><code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k&#34;</code></pre>
+<p>下載完後重新啟動 terminal 就可以開始設定樣式，如果沒有跳出設定的視窗可以使用這個指令 <code>p10k configure</code>。在設定完後看起來大致上完美，其實不然，如果你使用 <code>ls</code> 指令會發現產生出來的顏色巨雞巴醜，解決的方法是設定 LS_COLORS，作法：到<a href="https://github.com/seebi/dircolors-solarized">這裡</a>選一個喜歡的主題下載，例如：</p>
+<pre><code>curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors</code></pre>
+<p>接著在 <code>~./zshrc</code> 裡面加上這行 (<a href="https://medium.com/gammastack/setup-wsl-on-windows-part-2-f64a9fd546ac">參考資料</a>)：</p>
+<pre><code>## set colors for LS_COLORS
+eval `dircolors ~/.dircolors`</code></pre>
+<h2 id="安裝-hugo">安裝 Hugo</h2>
 
 <h2 id="開始建立部落格">開始建立部落格</h2>
-
-<p>創建新的 jekyll 架構，在想要的資料夾路徑底下輸入：</p>
-<pre><code>jekyll new 名稱</code></pre>
-<blockquote>
-<p><a href="https://webdesign.tutsplus.com/tutorials/how-to-set-up-a-jekyll-theme--cms-26332">https://webdesign.tutsplus.com/tutorials/how-to-set-up-a-jekyll-theme--cms-26332</a></p>
-</blockquote>
               
             </div>
           </div>
@@ -565,9 +551,7 @@ sudo apt-get --purge remove zsh     # 刪除 zsh</code></pre>
 
     
   
-    
-      <div id="cover" style="background-image:url('https://ligoon.github.io/img/sea_wave.jpg');"></div>
-    
+    <div id="cover" style="background-image:url('https://ppt.cc/f37p0x');"></div>
   
 
 
@@ -626,7 +610,7 @@ $(document).ready(function() {
             return;
           }
           var d = document, s = d.createElement('script');
-          var disqus_shortname = 'tranquilpeak';
+          var disqus_shortname = 'ligoon';
           s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
           s.setAttribute('data-timestamp', +new Date());
