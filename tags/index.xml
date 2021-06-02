@@ -5,6 +5,34 @@
     <link>https://ligoon.github.io/tags/</link>
     <description>Recent content in Tags on Ligoon&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-tw</language><atom:link href="https://ligoon.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-tw</language>
+    <lastBuildDate>Wed, 02 Jun 2021 16:29:38 +0800</lastBuildDate><atom:link href="https://ligoon.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>deep learning</title>
+      <link>https://ligoon.github.io/tags/deep-learning/</link>
+      <pubDate>Wed, 02 Jun 2021 16:29:38 +0800</pubDate>
+      
+      <guid>https://ligoon.github.io/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dentall</title>
+      <link>https://ligoon.github.io/tags/dentall/</link>
+      <pubDate>Wed, 02 Jun 2021 16:29:38 +0800</pubDate>
+      
+      <guid>https://ligoon.github.io/tags/dentall/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine learning</title>
+      <link>https://ligoon.github.io/tags/machine-learning/</link>
+      <pubDate>Wed, 02 Jun 2021 16:29:38 +0800</pubDate>
+      
+      <guid>https://ligoon.github.io/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

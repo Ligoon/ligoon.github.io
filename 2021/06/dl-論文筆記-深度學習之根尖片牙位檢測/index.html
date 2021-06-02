@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.83.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Chieh Nien">
+<meta name="keywords" content="deep learning">
+<meta name="description" content="Paper 全名：&rdquo;A deep learning approach to automatic teeth detection and numbering based on object detection in dental periapical films&rdquo;">
+
+
+<meta property="og:description" content="Paper 全名：&rdquo;A deep learning approach to automatic teeth detection and numbering based on object detection in dental periapical films&rdquo;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[DL 論文筆記] 深度學習之根尖片牙位檢測 ">
+<meta name="twitter:title" content="[DL 論文筆記] 深度學習之根尖片牙位檢測 ">
+<meta property="og:url" content="https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+<meta property="twitter:url" content="https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+<meta property="og:site_name" content="Ligoon&#39;s Blog">
+<meta property="og:description" content="Paper 全名：&rdquo;A deep learning approach to automatic teeth detection and numbering based on object detection in dental periapical films&rdquo;">
+<meta name="twitter:description" content="Paper 全名：&rdquo;A deep learning approach to automatic teeth detection and numbering based on object detection in dental periapical films&rdquo;">
+<meta property="og:locale" content="zh-tw">
+
+  
+    <meta property="article:published_time" content="2021-06-02T16:29:38">
+  
+  
+    <meta property="article:modified_time" content="2021-06-02T16:29:38">
+  
+  
+  
+    
+      <meta property="article:section" content="deep learning">
+    
+  
+  
+    
+      <meta property="article:tag" content="dentall">
+    
+      <meta property="article:tag" content="machine learning">
+    
+      <meta property="article:tag" content="deep learning">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://i.imgur.com/VfYd8Wq.jpg">
+  <meta property="twitter:image" content="https://i.imgur.com/VfYd8Wq.jpg">
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=640">
+
+
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+
+    <title>[DL 論文筆記] 深度學習之根尖片牙位檢測 </title>
+
+    <link rel="icon" href="https://ligoon.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://ligoon.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://ligoon.github.io/">Ligoon&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://ligoon.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=90" alt="作者的圖片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://ligoon.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=110" alt="作者的圖片" />
+        </a>
+        <h4 class="sidebar-profile-name">Chieh Nien</h4>
+        
+          <h5 class="sidebar-profile-bio">Don&rsquo;t be a programmer. Be a problem solver.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首頁</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分類</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">標籤</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">所有文章</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">關於</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Ligoon" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://ligoon.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">Atom</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      [DL 論文筆記] 深度學習之根尖片牙位檢測 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-06-02T16:29:38&#43;08:00">
+        
+  六月 2, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>分類</span>
+    
+      <a class="category-link" href="https://ligoon.github.io/categories/deep-learning">deep learning</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Paper 全名：&rdquo;A deep learning approach to automatic teeth detection and numbering based on object detection in dental periapical films&rdquo;</p>
+
+<p>此論文使用的是 periapical films (PA)，跟 dentall (小弟我實習的公司) 使用的 x-ray 照片相同，並且使用 fast R-CNN，比較特別的是此篇論文使用了三個 post-processing 的方法。(1) filtering algorithm 來刪除 faster R-CNN 偵測出來 overlapping 的 bounding boxes (2) 額外使用 neural network model 來偵測缺失的牙齒 (3) rule-based module 來修正違反直覺規則的預測結果</p>
+
+<p><img src="https://i.imgur.com/xrAoGHq.jpg" alt="" /></p>
+
+<h2 id="materials-and-methods">Materials and Methods</h2>
+
+<p>本論文總共使用了 1250 張 periapical films，其中 training 為 800 張，解析度大概是(300~500) x (300~400) pixels，label的部分是由職業超過五年的牙醫師標註，值得注意的是 bounding boxes 的所標註的是包含牙齒的 root and crown，另外在圖片的邊界部分，如果牙齒被裁掉超過 <sup>1</sup>&frasl;<sub>2</sub> 則不被標記。</p>
+
+<p>本篇論文是使用 tensorflow 提供的 <a href="https://github.com/tensorflow/models/tree/master/research/object_detection">object detection API</a>，其中模型是使用 Faster R-CNN with Inception Resnet version 2，總共使用 32 類來做分類。
+&gt; 註: 必須確認北醫的標註資料中的標準
+<div class="alert info ">
+  <p>補充 Precision / Recall 的計算方式，可參考<a href="https://chih-sheng-huang821.medium.com/%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E7%B3%BB%E5%88%97-%E4%BB%80%E9%BA%BC%E6%98%AFap-map-aaf089920848">這篇</a>
+$$Precision = \frac{TP}{TP+FP}$$$$Recall = \frac{TP}{TP+FN}$$其中 TP 為被偵測為物件且 IOU 大於 0.5，FP 為偵測為物件但 IOU 小於等於 0.5 (Ex: 不是狗但被模型判斷為狗的個數)，FN 為沒有被偵測出的物件個數 (是狗但被模型判斷為不是狗的個數)</p>
+</div></p>
+
+<h2 id="postprocessing-procedures">postprocessing procedures</h2>
+
+<p>postprocessing 的添加可以說是這篇 paper 的重點，也因為 postprocessing 的關係使得 numbering precision 上升了不少，這也許是在處理北醫的資料可以添加的步驟。步驟總共有以下三種 :</p>
+
+<h3 id="filtering-of-excessive-overlapped-boxes">Filtering of excessive overlapped boxes</h3>
+
+<p>我們知道在一般的物件偵測中會使用 non-maximum suppression，然而 non-maximum suppression 只會針對同一個類別的 bboxes 做過濾，也就是說不可能會發生兩個都是 23 的牙位框住同一顆牙齒，但有可能會發生牙位 23 跟 13 的兩個 bboxes 同時框住一顆牙齒的現象。不過這篇論文說解決方法是:</p>
+
+<p>&ldquo;To detect these overlapped boxes, IOUs of any pair of boxes in an image were calculated. When an IOU of the box-pair exceeding the threshold of 0.7 is detected, the box with a lower score will be deleted.&rdquo;</p>
+
+<p>當中的核心概念其實就是牙齒不會有疊再一起的狀況(例如打領帶的人，則領帶跟人的 bboxes 就會重疊)，也就是對於一張圖片我們去計算任兩個 bboxes(不管類別) 的 IOU，並且給定 threshold (論文是給定 0.7)，如果超過 threshold 則保留信心分數較高的那個 box。</p>
+
+<h3 id="application-of-teeth-arrangement-rules">Application of teeth arrangement rules</h3>
+
+<p>論文提到，在消除重疊的 bboxes 後 precision 跟 recall 還是不到 0.8，因此添加了一些已知的牙位命名規則來做判斷。首先先介紹 FDI 牙位命名規則：成人牙齒總共會有 32 顆，18-11 是右上的編號，21-28 是左上，48-41 是右下，最後 31-38 是左下，此外牙齒總共可以分為六類: wisdom (W), molar (M), premolar (P), canine (Ca), lateral incisor (La), and central incisor (Ce) (註：在下顎的分類把 La 跟 Ce 都歸類成同一類 Incisor (I))，而在同一類的牙齒通常都會有極高的相似性，因此此論文就依據這個規則進一步延伸出修正牙位的的方法。</p>
+
+<p><img src="https://i.imgur.com/JkThlMp.jpg" alt="" /></p>
+
+<p>下圖表一為每個牙位所對應的種類，縮寫如上述所示，而表二為每個種類之間的相似程度比例，這個相似程度的定義是由牙醫師所制定的。以下兩張圖表都是在修正牙位演算法的計算過程會使用到的。</p>
+
+<p><img src="https://i.imgur.com/MhdEUy5.jpg" alt="" />
+<img src="https://i.imgur.com/LNRcc5l.jpg" alt="" />
+演算法的步驟如下：</p>
+
+<p><strong>(1)</strong> 將預測出來的牙位從左到右與模板做比較，例如預測出來的是 [23, 22, 21, 21]，我們將他跟上顎的模板做比較(這邊可能必須先做其他的判斷來事先知道這是上顎的牙齒或下顎，就只需要跟其中一個的模板做比較就好，以降低時間複雜度)</p>
+
+<p><strong>(2)</strong> 接著計算 match score 跟 misnatch score，match score 是當該牙齒的預測牙位與模板牙位一致時，此時的 match score 等於信心分數，例如牙位 21 對應到模板的牙位 21，則該牙齒的 match score 即為信心分數 97；而如果該牙齒的牙位沒有對應到模板牙位，則計算 mismatch score，計算方式為該牙齒的信心分數乘上該種類間的相似度，例如最左邊的小圖，21 匹配到模板的 15，這時從上表一可以知道 21 是 Ce 而 15 是 P，接著對應上表二得知 Ce 跟 P 的相似度是 0.4，因此這顆牙齒的 mismatch score 就是 97 * 0.4 = 39</p>
+
+<p><strong>(3)</strong> 把所有牙齒的 mismatch 或 match score 都加在一起，最後分數最高的那組所對應的模板就是正確的。以下圖為例，正確的牙位應該被修正為 [13, 12, 11, 21]
+<img src="https://i.imgur.com/90B8rzf.jpg" alt="" /></p>
+
+<h3 id="prediction-of-missing-teeth">Prediction of missing teeth</h3>
+
+<p>如果遇到缺失的牙齒，則上面的 teeth arrangement rules 就會失效，因此 paper 這邊提出了一個方法，在做 matching 之前先利用 DNN 來做缺失牙齒的預測，這邊的架構很簡單，只有兩層 hidden layers 且各 10 neurals。inputs 總共有兩個 features，分別是兩個 bboxes 的水平距離以及中心點的距離，但筆者不是很明白 output 所代表的意義，為何是 0~3？猜想應該是代表說 input 的兩顆牙齒中間總共空了幾顆牙齒(以下摘錄自原文 paper)</p>
+
+<p>The horizontal margin distance and center distance of two adjacent boxes were used as the input features, while the missing teeth number (ranges from 0 to 3, as observed in the train dataset) was set as the label to predict.</p>
+
+<p>在預測完後會把缺失的值補 M 再餵入 matching algorithm，例如 [17, 16, M, M, 13]，然後 M 所對應的相似度都會為 0。最終整體的過程如下圖所示:</p>
+
+<p><img src="https://i.imgur.com/ykCZVlr.jpg" alt="" /></p>
+
+<h2 id="result">Result</h2>
+
+<p>結果可以看到 Numbering precision 跟 Numbering recall 都有了大幅度的提升，從原本的 0.715, 0.782 上升到 0.917, 0.914，但比較奇怪的是理論上 IOU 應該會受到 recall, precision 影響，為什麼 IOU 會都沒有上升？另外右邊是對照 A B C 三位專家醫生的比較，可以看到專業醫生的對 testing 的標註其實有明顯的差距 (例如 A 的 recall 對照 C 的 recall)，這也是另一個令人懷疑的地方，單純的標註牙位對於不同醫生甚至已經執業的真的會有如此多的差距嗎？另外若真的如此，我們請北醫的學生標註資料是否又真的合適？</p>
+
+<p><img src="https://i.imgur.com/f1Cyw2q.jpg" alt="" /></p>
+
+<p>下圖是論文依照 testing 的結果對錯誤的標註做了分類，可以看到機器 (AS) 跟專家 B 的結果竟然沒有差太多(?，另外最常錯的第 3 跟 4 類分別代表的意義分別是：(3) 主要是前牙, 相同形狀的牙齒很容易搞混, 例如 ‘12’, ‘11’, ‘21’, 跟 ‘22’ 就很容易搞混，以及 (4) 有些特定的缺牙沒有被認出因此導致前面或後面的牙齒沒有被辨認出來</p>
+
+<p><img src="https://i.imgur.com/6gv4eRQ.jpg" alt="" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>總之，雖然論文聲稱機器的準確度已經到達跟醫生差不多水平(IOU 91%)，但筆者還是認為醫生的準確度應該不可能低成這樣(?，而這篇論文的機器準確度確實跟 dentall 在北醫資料所得到的結果差不多 (IOU 89%)，而北醫的資料集大約接近 9000 張，理論上表現應該要更好，也許可以嘗試看看論文所提到的 post-processing 方法。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">標籤</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://ligoon.github.io/tags/dentall/">dentall</a>
+
+  <a class="tag tag--primary tag--small" href="https://ligoon.github.io/tags/machine-learning/">machine learning</a>
+
+  <a class="tag tag--primary tag--small" href="https://ligoon.github.io/tags/deep-learning/">deep learning</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/" data-tooltip="[Hugo] 用 Hugo 建立部落格">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 Chieh Nien. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/" data-tooltip="[Hugo] 用 Hugo 建立部落格">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ligoon.github.io/2021/06/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fligoon.github.io%2F2021%2F06%2Fdl-%25E8%25AB%2596%25E6%2596%2587%25E7%25AD%2586%25E8%25A8%2598-%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25B8%25E7%25BF%2592%25E4%25B9%258B%25E6%25A0%25B9%25E5%25B0%2596%25E7%2589%2587%25E7%2589%2599%25E4%25BD%258D%25E6%25AA%25A2%25E6%25B8%25AC%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fligoon.github.io%2F2021%2F06%2Fdl-%25E8%25AB%2596%25E6%2596%2587%25E7%25AD%2586%25E8%25A8%2598-%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25B8%25E7%25BF%2592%25E4%25B9%258B%25E6%25A0%25B9%25E5%25B0%2596%25E7%2589%2587%25E7%2589%2599%25E4%25BD%258D%25E6%25AA%25A2%25E6%25B8%25AC%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fligoon.github.io%2F2021%2F06%2Fdl-%25E8%25AB%2596%25E6%2596%2587%25E7%25AD%2586%25E8%25A8%2598-%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25B8%25E7%25BF%2592%25E4%25B9%258B%25E6%25A0%25B9%25E5%25B0%2596%25E7%2589%2587%25E7%2589%2599%25E4%25BD%258D%25E6%25AA%25A2%25E6%25B8%25AC%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/2753b98f6950141e0fce89571f12edf4?s=110" alt="作者的圖片" />
+    
+    <h4 id="about-card-name">Chieh Nien</h4>
+    
+      <div id="about-card-bio">Don&rsquo;t be a programmer. Be a problem solver.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        NYCU CS student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://ligoon.github.io/images/sea_cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://ligoon.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/ligoon.github.io\/2021\/06\/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC\/';
+          
+            this.page.identifier = '\/2021\/06\/dl-%E8%AB%96%E6%96%87%E7%AD%86%E8%A8%98-%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%A0%B9%E5%B0%96%E7%89%87%E7%89%99%E4%BD%8D%E6%AA%A2%E6%B8%AC\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'ligoon';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: { linebreaks: { automatic: true } },
+      tex2jax: { inlineMath: [ ['$', '$'], ['\\(','\\)'] ], displayMath: [ ['$$','$$'], ['\\[', '\\]'] ], processEscapes: false },
+      messageStyle: 'none'
+    });
+  </script>
+
+
+
+    
+  </body>
+</html>
+
