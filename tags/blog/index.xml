@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on Ligoon&#39;s Blog</title>
+    <link>https://ligoon.github.io/tags/blog/</link>
+    <description>Recent content in blog on Ligoon&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Fri, 28 May 2021 20:51:10 +0800</lastBuildDate><atom:link href="https://ligoon.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Hugo] 用 Hugo 建立部落格</title>
+      <link>https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/</link>
+      <pubDate>Fri, 28 May 2021 20:51:10 +0800</pubDate>
+      
+      <guid>https://ligoon.github.io/2021/05/hugo-%E7%94%A8-hugo-%E5%BB%BA%E7%AB%8B%E9%83%A8%E8%90%BD%E6%A0%BC/</guid>
+      <description>&lt;p&gt;這篇用來記錄如何在 Windows 環境中安裝 WSL(Windows Subsystem for linux) 以及相關套件，並且使用 WSL 架設 Hugo 部落格最後發布到 Github pages&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
